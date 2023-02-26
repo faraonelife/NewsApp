@@ -3,7 +3,6 @@ package com.example.newsapp.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -16,9 +15,8 @@ import com.example.newsapp.models.Article
 class NewsAdapter:RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
 
     inner class ArticleViewHolder(itemView: View):RecyclerView.ViewHolder(itemView) {
-        val binding = ItemArticlePreviewBinding.bind(itemView)
+      var binding = ItemArticlePreviewBinding.bind(itemView)
         fun bind(article: Article) {
-            Glide.with(itemView).load(article.urlToImage).into(binding.ivArticleImage)
             binding.tvSource.text=article.source.name
             binding.tvTitle.text=article.title
             binding.tvDescription.text=article.description
@@ -40,7 +38,7 @@ class NewsAdapter:RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
         }
     }
 
-    private val differ=AsyncListDiffer(this,differCallBack)
+    val differ=AsyncListDiffer(this,differCallBack)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
         return ArticleViewHolder(
@@ -49,8 +47,14 @@ class NewsAdapter:RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
+
       val article=differ.currentList[position]
-      holder.bind(article)
+        holder.itemView.apply{
+            Glide.with(this).load(article.urlToImage).into(holder.binding.ivArticleImage)
+
+        }
+
+        holder.bind(article)
 
     }
 
