@@ -22,7 +22,7 @@ interface NewsApi {
 
     @GET("v2/everything")
     suspend fun searchForNews(
-        @Query("query")
+        @Query("q")
         searchQuery: String,
         @Query("page")
         pageNumber:Int=1,
