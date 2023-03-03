@@ -12,7 +12,8 @@
         android:layout_height="104dp"
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/image" />
 
     <TextView
         android:id="@+id/tvSource"
@@ -20,7 +21,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/source"
-        android:textColor="@android:color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivArticleImage" />
 
@@ -32,7 +32,7 @@
         android:ellipsize="end"
         android:maxLines="6"
         android:text="@string/title"
-        android:textColor="@android:color/black"
+
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintRight_toRightOf="parent"
@@ -48,7 +48,6 @@
         android:ellipsize="end"
         android:maxLines="5"
         android:text="@string/description"
-        android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ivArticleImage"
         app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
@@ -59,7 +58,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/published_at"
-        android:textColor="@android:color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvSource" />
 
