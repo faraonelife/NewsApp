@@ -13,7 +13,10 @@ interface ArticleDao {
     @Query("SELECT * FROM articles")
     fun getAllArticles ():LiveData<List<Article>>
 
+    @Query("SELECT * FROM articles WHERE url = :url LIMIT 1")
+    suspend fun findByUrl(url: String): Article?
 
     @Delete
     suspend fun deleteArticles(article: Article)
+
 }
