@@ -8,7 +8,7 @@ import android.os.Build
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.newsapp.NewsApplication
+import com.example.newsapp.util.NewsApplication
 import com.example.newsapp.models.Article
 import com.example.newsapp.models.NewsResponse
 import com.example.newsapp.repository.NewsRepository
@@ -113,6 +113,7 @@ class NewsViewModel(
         breakingNews.postValue(Resource.Loading())
         try {
             if (hasInternetConnection()){
+
             val response = newsRepository.getBreakingNews(source, breakingNewsPage)
                 breakingNews.postValue(handleBreakingNewsResponse(response))
             }

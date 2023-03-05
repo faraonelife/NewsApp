@@ -49,7 +49,6 @@ class NewsAdapter:RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
         return differ.currentList.size
     }
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
-        
       val article=differ.currentList[position]
         holder.itemView.apply{
             Glide.with(this).load(article.urlToImage).into(holder.binding.ivArticleImage)

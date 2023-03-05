@@ -8,4 +8,8 @@
     <string name="description">DESCRIPTION</string>
     <string name="published_at">PUBLISHED AT</string>
     <string name="image">Image</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="go">GO</string>
+    <string name="login">Login</string>
 </resources>

@@ -1,8 +1,14 @@
 package com.example.newsapp.db
 
 import android.content.Context
+import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
 import androidx.room.*
 import com.example.newsapp.models.Article
+import com.example.newsapp.util.Constants.Companion.KEY_FIRST_TIME_TOGGLE
+import com.example.newsapp.util.Constants.Companion.KEY_PASSWORD
+import com.example.newsapp.util.Constants.Companion.KEY_USERNAME
+import com.example.newsapp.util.Constants.Companion.SHARED_PREFERENCE_NAME
 
 @Database(
     entities = [Article::class],
@@ -28,5 +34,7 @@ abstract class ArticleDatabase : RoomDatabase(){
             ArticleDatabase::class.java,
             "article_db.db"
         ).build()
-}
-}
+
+
+
+} }
