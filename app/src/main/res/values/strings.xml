@@ -10,6 +10,6 @@
     <string name="image">Image</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
-    <string name="go">GO</string>
-    <string name="login">Login</string>
+    <string name="Login_btn">login</string>
+    <string name="Login_main">Welcome</string>
 </resources>

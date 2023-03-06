@@ -17,8 +17,8 @@ import com.google.android.material.snackbar.Snackbar
 
 
 class LoginFragment : Fragment(R.layout.fragment_login) {
-lateinit var sharedPref:SharedPreferences
- var isFirstAppOpen=true
+private lateinit var sharedPref:SharedPreferences
+ private var isFirstAppOpen=true
     lateinit var binding:FragmentLoginBinding
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -47,7 +47,7 @@ lateinit var sharedPref:SharedPreferences
             if (destination.id == R.id.breakingNewsFragment) {
                 val username = sharedPref.getString(KEY_USERNAME, "") ?: ""
                 if (activity != null) {
-                    Toast.makeText(activity, "Hi $username", Toast.LENGTH_LONG).show()
+                    Toast.makeText(activity, "Welcome $username", Toast.LENGTH_LONG).show()
                 }
             }
         }
@@ -56,7 +56,8 @@ lateinit var sharedPref:SharedPreferences
     private fun writePersonalDataToSharedPref():Boolean{
         val username=binding.etUserName.text.toString()
         val password=binding.etPassword.text.toString()
-        if(username.isEmpty()||password.isEmpty()){
+        if(username.isEmpty()||password.isEmpty())
+        {
             return false
         }
         sharedPref.edit()

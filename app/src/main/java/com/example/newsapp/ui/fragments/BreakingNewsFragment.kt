@@ -21,9 +21,9 @@ import com.example.newsapp.util.Resource
 
 class BreakingNewsFragment :Fragment(R.layout.fragment_breaking_news){
      lateinit var viewModel: NewsViewModel
-     lateinit var newsAdapter: NewsAdapter
-     lateinit var binding: FragmentBreakingNewsBinding
-    val TAG="BreakingNewsFragment"
+     private lateinit var newsAdapter: NewsAdapter
+     private lateinit var binding: FragmentBreakingNewsBinding
+    private val TAG="BreakingNewsFragment"
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
@@ -62,7 +62,7 @@ class BreakingNewsFragment :Fragment(R.layout.fragment_breaking_news){
                 is Resource.Error->{
                     hideProgressBar()
                     response.message?.let {
-                        message-> Toast.makeText(activity,"An error occured: $message",Toast.LENGTH_SHORT).show()
+                        message-> Toast.makeText(activity,"An error occurred: $message",Toast.LENGTH_SHORT).show()
                     }
                 }
                 is Resource.Loading->{

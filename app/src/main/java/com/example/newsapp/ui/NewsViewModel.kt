@@ -26,7 +26,7 @@ class NewsViewModel(
      var breakingNewsPage = 1
     var breakingNewsResponse:NewsResponse?=null
 
-    val serchNews: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
+    val searchNews: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
      var serchingNewsPage = 1
     var searchNewsResponse:NewsResponse?=null
 
@@ -88,19 +88,19 @@ class NewsViewModel(
 
 
     private suspend fun safeSearchNewsCall(serchQuery: String){
-        serchNews.postValue(Resource.Loading())
+        searchNews.postValue(Resource.Loading())
         try {
             if (hasInternetConnection()){
                 val response = newsRepository.searchNews(serchQuery, serchingNewsPage)
-                serchNews.postValue(handleSearchNewsResponse(response))
+                searchNews.postValue(handleSearchNewsResponse(response))
             }
             else{
-                serchNews.postValue(Resource.Error("No internet connection"))
+                searchNews.postValue(Resource.Error("No internet connection"))
             }
         }catch (t:Throwable){
             when(t){
-                is IOException->serchNews.postValue(Resource.Error("Network Failure"))
-                else->serchNews.postValue(Resource.Error("Conversion Error"))
+                is IOException->searchNews.postValue(Resource.Error("Network Failure"))
+                else->searchNews.postValue(Resource.Error("Conversion Error"))
             }
 
         }
@@ -113,7 +113,6 @@ class NewsViewModel(
         breakingNews.postValue(Resource.Loading())
         try {
             if (hasInternetConnection()){
-
             val response = newsRepository.getBreakingNews(source, breakingNewsPage)
                 breakingNews.postValue(handleBreakingNewsResponse(response))
             }

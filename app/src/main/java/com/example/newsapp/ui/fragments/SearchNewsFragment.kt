@@ -27,7 +27,7 @@ import kotlinx.coroutines.launch
 class SearchNewsFragment :Fragment(R.layout.fragment_search_news){
     private lateinit var viewModel: NewsViewModel
   lateinit var binding:FragmentSearchNewsBinding
-    lateinit var newsAdapter: NewsAdapter
+    private lateinit var newsAdapter: NewsAdapter
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentSearchNewsBinding.bind(view)
@@ -59,7 +59,7 @@ class SearchNewsFragment :Fragment(R.layout.fragment_search_news){
 
 
 
-        viewModel.serchNews.observe(viewLifecycleOwner, Observer { response ->
+        viewModel.searchNews.observe(viewLifecycleOwner, Observer { response ->
             when (response) {
                 is Resource.Success -> {
                     hideProgressBar()
@@ -76,7 +76,7 @@ class SearchNewsFragment :Fragment(R.layout.fragment_search_news){
                 is Resource.Error -> {
                     hideProgressBar()
                     response.message?.let { message ->
-                        Toast.makeText(activity,"An error occured: $message", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(activity,"An error occurred: $message", Toast.LENGTH_SHORT).show()
                     }
                 }
                 is Resource.Loading -> {
@@ -117,8 +117,7 @@ class SearchNewsFragment :Fragment(R.layout.fragment_search_news){
             val isAtLastItem=firstVisibleItemPosition+visibleItemCount>=totalItemCount
             val isNotAtBeginning=firstVisibleItemPosition>=0
             val isTotalMoreThanVisible=totalItemCount>= Constants.QUERY_PAGE_SIZE
-
-            val shouldPaginate=isNotLoadingAndNotLastPage && isAtLastItem&&isNotAtBeginning&&isTotalMoreThanVisible&& isScrolling
+            val shouldPaginate=isNotLoadingAndNotLastPage && isAtLastItem&&isNotAtBeginning&&isTotalMoreThanVisible && isScrolling
             if(shouldPaginate){
                 viewModel.searchNews(binding.etSearch.text.toString())
                 isScrolling=false

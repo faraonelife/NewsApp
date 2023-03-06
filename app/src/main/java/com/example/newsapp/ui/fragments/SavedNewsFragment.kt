@@ -18,7 +18,7 @@ import com.google.android.material.snackbar.Snackbar
 
 class SavedNewsFragment :Fragment(R.layout.fragment_saved_news){
     private lateinit var viewModel: NewsViewModel
-    lateinit var binding:FragmentSavedNewsBinding
+    private lateinit var binding:FragmentSavedNewsBinding
     lateinit var newsAdapter: NewsAdapter
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding = FragmentSavedNewsBinding.bind(view)
@@ -29,8 +29,7 @@ class SavedNewsFragment :Fragment(R.layout.fragment_saved_news){
             val bundle=Bundle().apply{
                 putSerializable("article",it)
             }
-            findNavController().navigate(R.id.action_savedNewsFragment_to_articleFragment,
-                bundle)
+            findNavController().navigate(R.id.action_savedNewsFragment_to_articleFragment,bundle)
         }
 
 
@@ -50,7 +49,7 @@ class SavedNewsFragment :Fragment(R.layout.fragment_saved_news){
               val position=viewHolder.adapterPosition
                 val article=newsAdapter.differ.currentList[position]
                 viewModel.deleteArticle(article)
-                val snackbar=Snackbar.make(view,"Successfully deleted article",Snackbar.LENGTH_LONG).apply {
+                val snackbar=Snackbar.make(view,"Article deleted",Snackbar.LENGTH_SHORT).apply {
                     setAction("Undo"){
                         viewModel.saveArticle(article)
                     }

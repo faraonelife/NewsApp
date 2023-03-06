@@ -13,10 +13,10 @@ import java.util.*
 
 
 class Notification : Service() {
-        private val CHANNEL_ID = "NotificationService"
-        private val NOTIFICATION_ID = 1
-        private val INTERVAL = 6*60*60 * 1000 // 6 hours in milliseconds
-        private val GROUP_ID = "MyNotificationGroup"
+         val CHANNEL_ID = "NotificationService"
+         val NOTIFICATION_ID = 1
+         val INTERVAL = 6*60*60 * 1000 // 6 hours in milliseconds
+         val GROUP_ID = "MyNotificationGroup"
         private lateinit var alarmManager: AlarmManager
         private lateinit var pendingIntent: PendingIntent
 
@@ -94,6 +94,7 @@ class Notification : Service() {
         private fun createNotificationChannel() {
             val name = "Notification Channel"
             val descriptionText = "Notification Channel Description"
+            val groupDescription ="My Notification Group"
             val importance = NotificationManager.IMPORTANCE_DEFAULT
             val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
                 description = descriptionText
@@ -102,7 +103,7 @@ class Notification : Service() {
                 getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(channel)
 
-            val group = NotificationChannelGroup(GROUP_ID, "My Notification Group")
+            val group = NotificationChannelGroup(GROUP_ID,groupDescription )
             notificationManager.createNotificationChannelGroup(group)
         }
 
