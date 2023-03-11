@@ -25,9 +25,9 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class SearchNewsFragment :Fragment(R.layout.fragment_search_news){
-    private lateinit var viewModel: NewsViewModel
+    lateinit var viewModel: NewsViewModel
   lateinit var binding:FragmentSearchNewsBinding
-    private lateinit var newsAdapter: NewsAdapter
+    lateinit var newsAdapter: NewsAdapter
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentSearchNewsBinding.bind(view)
@@ -63,9 +63,9 @@ class SearchNewsFragment :Fragment(R.layout.fragment_search_news){
             when (response) {
                 is Resource.Success -> {
                     hideProgressBar()
-                    response.data?.let { newsResponse ->
+                    response.data.let { newsResponse ->
                         newsAdapter.differ.submitList(newsResponse.articles.toList())
-                        val totalPages=newsResponse.totalResults/ Constants.QUERY_PAGE_SIZE +2
+                        val totalPages=newsResponse.totalResults/ Constants.QUERY_PAGE_SIZE
                         isLastPage=viewModel.serchingNewsPage==totalPages
                         if(isLastPage){
                             binding.rvSearchNews.setPadding(0,0,0,0)
@@ -76,7 +76,7 @@ class SearchNewsFragment :Fragment(R.layout.fragment_search_news){
                 is Resource.Error -> {
                     hideProgressBar()
                     response.message?.let { message ->
-                        Toast.makeText(activity,"An error occurred: $message", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(activity,"An error occurred , total load length  can be= 100: $message", Toast.LENGTH_SHORT).show()
                     }
                 }
                 is Resource.Loading -> {

@@ -67,11 +67,10 @@ class Notification : Service() {
         override fun onDestroy() {
             super.onDestroy()
             alarmManager.cancel(pendingIntent)
-
         }
 
         @RequiresApi(Build.VERSION_CODES.O)
-        private fun showNotification():android.app.Notification {
+        fun showNotification():android.app.Notification {
             createNotificationChannel()
 
             val builder = NotificationCompat.Builder(this, CHANNEL_ID)

@@ -21,14 +21,15 @@ import com.example.newsapp.util.Resource
 
 class BreakingNewsFragment :Fragment(R.layout.fragment_breaking_news){
      lateinit var viewModel: NewsViewModel
-     private lateinit var newsAdapter: NewsAdapter
-     private lateinit var binding: FragmentBreakingNewsBinding
+     lateinit var newsAdapter: NewsAdapter
+     lateinit var binding: FragmentBreakingNewsBinding
     private val TAG="BreakingNewsFragment"
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentBreakingNewsBinding.bind(view)
         viewModel = (activity as NewsActivity).viewModel
+
         setupRecyclerView()
 
         newsAdapter.setOnItemClickListener{article->
@@ -47,8 +48,7 @@ class BreakingNewsFragment :Fragment(R.layout.fragment_breaking_news){
             when(response){
                 is Resource.Success->{
                     hideProgressBar()
-                    response.data?.let{
-                        newsResponse->
+                    response.data.let{ newsResponse->
                         newsAdapter.differ.submitList(newsResponse.articles.toList())
                         val totalPages=newsResponse.totalResults/ QUERY_PAGE_SIZE+1
                         isLastPage=viewModel.breakingNewsPage==totalPages
@@ -65,7 +65,7 @@ class BreakingNewsFragment :Fragment(R.layout.fragment_breaking_news){
                         message-> Toast.makeText(activity,"An error occurred: $message",Toast.LENGTH_SHORT).show()
                     }
                 }
-                is Resource.Loading->{
+                Resource.Loading->{
                     showProgressBar()
 
                 }

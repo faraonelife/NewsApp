@@ -37,7 +37,8 @@ private lateinit var sharedPref:SharedPreferences
             if (success) {
                 findNavController().navigate(R.id.action_loginFragment_to_breakingNewsFragment)
             }else{
-                Snackbar.make(requireView(),"Please enter all the fields",Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(requireView(),"Please check your username & password,they should be max 6 symbols",
+                    Snackbar.LENGTH_SHORT).show()
             }
         }
 
@@ -60,6 +61,11 @@ private lateinit var sharedPref:SharedPreferences
         {
             return false
         }
+        if (username.length>6 || password.length>6)
+        {
+            return false
+        }
+
         sharedPref.edit()
             .putString(KEY_USERNAME,username)
             .putString(KEY_PASSWORD,password)

@@ -5,9 +5,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.newsapp.util.NewsApplication
 import com.example.newsapp.models.Article
 import com.example.newsapp.models.NewsResponse
@@ -17,8 +15,9 @@ import kotlinx.coroutines.launch
 import retrofit2.Response
 import java.io.IOException
 
+
 class NewsViewModel(
-    app:Application,
+   app:Application,
     val newsRepository: NewsRepository
 ): AndroidViewModel(app) {
 
@@ -88,7 +87,7 @@ class NewsViewModel(
 
 
     private suspend fun safeSearchNewsCall(serchQuery: String){
-        searchNews.postValue(Resource.Loading())
+        searchNews.postValue(Resource.Loading)
         try {
             if (hasInternetConnection()){
                 val response = newsRepository.searchNews(serchQuery, serchingNewsPage)
@@ -110,7 +109,7 @@ class NewsViewModel(
 
 
     private suspend fun safeBreakingNewsCall(source: String){
-        breakingNews.postValue(Resource.Loading())
+        breakingNews.postValue(Resource.Loading)
         try {
             if (hasInternetConnection()){
             val response = newsRepository.getBreakingNews(source, breakingNewsPage)

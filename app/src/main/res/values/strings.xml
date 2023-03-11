@@ -12,4 +12,6 @@
     <string name="password">Password</string>
     <string name="Login_btn">login</string>
     <string name="Login_main">Welcome</string>
+    <string name="saved_articles">Saved Articles</string>
+    <string name="article">Article</string>
 </resources>

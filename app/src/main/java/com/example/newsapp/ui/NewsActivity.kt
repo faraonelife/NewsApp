@@ -15,7 +15,7 @@ import com.example.newsapp.repository.NewsRepository
 
 
 class NewsActivity : AppCompatActivity() {
-    private lateinit var binding :ActivityNewsBinding
+    lateinit var binding :ActivityNewsBinding
     lateinit var viewModel: NewsViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

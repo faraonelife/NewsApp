@@ -5,6 +5,7 @@ import android.view.View
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.newsapp.ui.NewsActivity
 import com.example.newsapp.R
@@ -17,9 +18,7 @@ class ArticleFragment :Fragment(R.layout.fragment_article){
      lateinit var viewModel: NewsViewModel
     private lateinit var binding: FragmentArticleBinding
     lateinit var article: Article
-
     val args:ArticleFragmentArgs by navArgs()
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding=FragmentArticleBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
@@ -31,10 +30,17 @@ class ArticleFragment :Fragment(R.layout.fragment_article){
             webViewClient= WebViewClient()
             loadUrl(article.url)
         }
+
         binding.fab.setOnClickListener{
             viewModel.saveArticle(article)
             Snackbar.make(view,"Article saved ;)",Snackbar.LENGTH_SHORT).show()
         }
+
+
+        binding.backButton.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
 
     }
 }
